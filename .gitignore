@@ -1,3 +1,5 @@
-nimcache/
-pipelines
-*.html
+**/nimcache/
+**/test
+**/benchmark
+**/pipelines
+**/*.html
