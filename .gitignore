@@ -1,5 +1,4 @@
+binary/
 **/nimcache/
-**/test
-**/benchmark
-**/pipelines
 **/*.html
+**/.DS_Store
