@@ -90,9 +90,9 @@ test "source.take(n)":
   assert([0, 1, 2].take(3).collect == @[0, 1, 2])
 
 test "source.map(op)":
-  assert(newSeq[int]().map((e: int) => e + 1).collect == newSeq[int](0))
-  assert(["0", "1"].map((e: string) => e & e).collect == @["00", "11"])
-  assert([0, 1, 2].map((e: int) => e + 1).collect == @[1, 2, 3])
+  assert(newSeq[int]().toSource.map((e: int) => e).collect == newSeq[int](0))
+  assert(["0", "1"].toSource.map((e: string) => e & e).collect == @["00", "11"])
+  assert([0, 1, 2].toSource.map((e: int) => e + 1).collect == @[1, 2, 3])
 
 test "source.filter(op)":
   assert(newSeq[int]().filter((e: int) => e > 0).collect == newSeq[int]())

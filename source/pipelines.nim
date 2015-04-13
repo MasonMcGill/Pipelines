@@ -14,7 +14,7 @@ proc refExpr(exprNode: PNimrodNode): string {.compileTime.} =
   "expr" & $(exprNodes.len - 1)
 
 proc derefExpr(exprRef: string): PNimrodNode {.compileTime.} =
-  exprNodes[parseInt(exprRef[4 .. -1])]
+  exprNodes[parseInt(exprRef[4 .. ^1])]
 
 #===============================================================================
 # AST Manipulation
@@ -60,11 +60,11 @@ template values(t: tuple): expr =
 #===============================================================================
 # Type Classes
 
-type Source* = generic S
-  var s: S; compiles(s.typeClassTag_Source)
+type Source* = concept s
+  compiles(s.typeClassTag_Source)
 
-type Sink* = generic S
-  var s: S; compiles(s.typeClassTag_Sink)
+type Sink* = concept s
+  compiles(s.typeClassTag_Sink)
 
 template Element*(S: typedesc[Source]): typedesc =
   var source {.noInit.}: S
@@ -143,7 +143,7 @@ iterator items*(source: Source): any =
       else: break
 
 proc collect*[Source](source: Source): any =
-  result = newSeq[source.items.type]()
+  result = newSeq[type(source.items)]()
   for e in source:
     result.add e
 
